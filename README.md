@@ -1,1 +1,1 @@
-# RustRAT
+# Only For Educational Purposes
