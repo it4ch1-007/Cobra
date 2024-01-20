@@ -1,0 +1,11 @@
+c:\Users\akshi\Downloads\Malware-Development\InfoSecRAT\target\debug\deps\libos_info-9443a5852407de6c.rmeta: C:\Users\akshi\.cargo\registry\src\index.crates.io-6f17d22bba15001f\os_info-3.7.0\src\lib.rs C:\Users\akshi\.cargo\registry\src\index.crates.io-6f17d22bba15001f\os_info-3.7.0\src\windows\mod.rs C:\Users\akshi\.cargo\registry\src\index.crates.io-6f17d22bba15001f\os_info-3.7.0\src\windows\winapi.rs C:\Users\akshi\.cargo\registry\src\index.crates.io-6f17d22bba15001f\os_info-3.7.0\src\bitness.rs C:\Users\akshi\.cargo\registry\src\index.crates.io-6f17d22bba15001f\os_info-3.7.0\src\info.rs C:\Users\akshi\.cargo\registry\src\index.crates.io-6f17d22bba15001f\os_info-3.7.0\src\os_type.rs C:\Users\akshi\.cargo\registry\src\index.crates.io-6f17d22bba15001f\os_info-3.7.0\src\version.rs
+
+c:\Users\akshi\Downloads\Malware-Development\InfoSecRAT\target\debug\deps\os_info-9443a5852407de6c.d: C:\Users\akshi\.cargo\registry\src\index.crates.io-6f17d22bba15001f\os_info-3.7.0\src\lib.rs C:\Users\akshi\.cargo\registry\src\index.crates.io-6f17d22bba15001f\os_info-3.7.0\src\windows\mod.rs C:\Users\akshi\.cargo\registry\src\index.crates.io-6f17d22bba15001f\os_info-3.7.0\src\windows\winapi.rs C:\Users\akshi\.cargo\registry\src\index.crates.io-6f17d22bba15001f\os_info-3.7.0\src\bitness.rs C:\Users\akshi\.cargo\registry\src\index.crates.io-6f17d22bba15001f\os_info-3.7.0\src\info.rs C:\Users\akshi\.cargo\registry\src\index.crates.io-6f17d22bba15001f\os_info-3.7.0\src\os_type.rs C:\Users\akshi\.cargo\registry\src\index.crates.io-6f17d22bba15001f\os_info-3.7.0\src\version.rs
+
+C:\Users\akshi\.cargo\registry\src\index.crates.io-6f17d22bba15001f\os_info-3.7.0\src\lib.rs:
+C:\Users\akshi\.cargo\registry\src\index.crates.io-6f17d22bba15001f\os_info-3.7.0\src\windows\mod.rs:
+C:\Users\akshi\.cargo\registry\src\index.crates.io-6f17d22bba15001f\os_info-3.7.0\src\windows\winapi.rs:
+C:\Users\akshi\.cargo\registry\src\index.crates.io-6f17d22bba15001f\os_info-3.7.0\src\bitness.rs:
+C:\Users\akshi\.cargo\registry\src\index.crates.io-6f17d22bba15001f\os_info-3.7.0\src\info.rs:
+C:\Users\akshi\.cargo\registry\src\index.crates.io-6f17d22bba15001f\os_info-3.7.0\src\os_type.rs:
+C:\Users\akshi\.cargo\registry\src\index.crates.io-6f17d22bba15001f\os_info-3.7.0\src\version.rs:
