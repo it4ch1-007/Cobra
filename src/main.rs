@@ -322,7 +322,7 @@ fn main() {
     let time: DateTime<Utc> = Utc::now();
     let filename = format!(
         "log-{}-{:02}+{:02}+{:02}.log",
-        time.date(),
+        time.date_naive(),
         time.hour(),
         time.minute(),
         time.second()
