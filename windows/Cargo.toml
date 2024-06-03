@@ -1,12 +1,32 @@
 [package]
 name = "InfoSecRAT"
 version = "0.1.0"
-edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+edition = "2018"
 
 [dependencies]
+winapi = { version = "0.3.9", features = [
+    "errhandlingapi",
+    "handleapi",
+    "libloaderapi",
+    "memoryapi",
+    "processthreadsapi",
+    "synchapi",
+    "winnt",
+    "ntdef",
+    "winbase",
+    "winuser",
+    "windef",
+    "minwindef",
+    "wlanapi",
+    "winerror",
+] }
 chrono = "*"
-winapi = { version = "0.3.0", features = ["winuser","processthreadsapi","psapi","winnls"] }
 os_info = "3.7.0"
-hostname = "0.3.1"
+hostname = "0.4.0"
+widestring = "1.1.0"
+libaes = "*"
+windows = "0.56.0"
+env_logger = "0.11.3"
+log = "0.4.21"
+quick-xml = "0.31.0"
+
