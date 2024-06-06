@@ -26,3 +26,9 @@
 - We can enable ProcessDynamicCodePolicy that can make our malware untouchable by the AVs that may try to modify or execute arbitrary instructions on our malware. The catch is that it doesnot disable the remote processes from arbitrary code execution and injection.
 
 
+- PEB overwrite ;
+    - We are going to hide our process as a legitimate process by overwriting its PEB that is writable from the user-space.
+    - PEB->ProcessParameters(0x020)->_RTL_USER_PROCESS_PARAMTERS has the info about the process that can be changed for this camouflage.
+    - `ImagePathName` changes the basic name of the process in all the tools of the windows like SysInternals.
+    - 
+
