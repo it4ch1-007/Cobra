@@ -1,0 +1,1 @@
+reg save hklm\sam sam

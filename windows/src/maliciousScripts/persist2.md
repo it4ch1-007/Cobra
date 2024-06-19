@@ -1,0 +1,1 @@
+.\netsh.exe add helper C:\tools\NetshHelperBeacon.dll

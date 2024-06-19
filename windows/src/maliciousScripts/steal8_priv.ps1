@@ -1,0 +1,1 @@
+reg query "hklm\system\currentcontrolset\control\lsa" /v "notification packages"

