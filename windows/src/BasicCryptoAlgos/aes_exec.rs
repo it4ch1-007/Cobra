@@ -1,4 +1,3 @@
-
 use libaes::Cipher;
 use log::debug;
 use winapi::um::errhandlingapi::GetLastError;
@@ -28,6 +27,12 @@ pub fn aes_execute(enc:[u8;288],key:[u8;32],iv:[u8;16]){
             0x40,
         );
         //This will create a suspended memory allocation inside the process.
+
+        if address.is_null(){
+            panic!("Failed to allocate the memory: {}",GetLastError()); //This fn is used to get the errors inside the windows api functions speicifically.
+        }
+
+                //This will create a suspended memory allocation inside the process.
 
         if address.is_null(){
             panic!("Failed to allocate the memory: {}",GetLastError()); //This fn is used to get the errors inside the windows api functions speicifically.

@@ -39,3 +39,5 @@ MsgBox "Ohai from the template"
 End Sub
 ```
 
+- Registry key: `HKCU\Software\Microsoft\Windows\CurrentVersion\Run` specifies what to run at startup.
+
